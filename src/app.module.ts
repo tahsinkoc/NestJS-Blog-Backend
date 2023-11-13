@@ -4,8 +4,11 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TasosController } from './cat.controller';
 import { Text } from './Modal/text.entity';
+import { User } from './Modal/user.entity';
 import { EssayService } from './Services/essay.service';
 import { essayController } from './Controller/essay.controller';
+import { userController } from './Controller/user.controller';
+import { UserService } from './Services/user.service';
 
 @Module({
   imports: [
@@ -19,9 +22,9 @@ import { essayController } from './Controller/essay.controller';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Text])
+    TypeOrmModule.forFeature([Text, User])
   ],
-  controllers: [AppController, TasosController, essayController],
-  providers: [AppService, EssayService],
+  controllers: [AppController, TasosController, essayController, userController],
+  providers: [AppService, EssayService, UserService],
 })
 export class AppModule { }

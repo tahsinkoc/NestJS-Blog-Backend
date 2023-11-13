@@ -1,14 +1,19 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, UnauthorizedException, Headers } from '@nestjs/common';
 import { Text } from 'src/Modal/text.entity';
 import { EssayService } from 'src/Services/essay.service';
-
-
+import { Auth } from 'src/Modal/auth';
 @Controller()
 export class essayController {
     constructor(private readonly Essay: EssayService) { }
 
     @Post('/write')
-    async write(@Body() PostData: Text): Promise<Text> {
+    async write(@Body() PostData: Text, @Headers('AuthToken') AuthToken: string): Promise<Text> {
+        const authInstance = Auth.getInstance();
+        console.log(AuthToken)
+        const result = await authInstance.check(AuthToken)
+        if (!result) {
+            throw new UnauthorizedException('You have to login first')
+        }
         return this.Essay.create(PostData)
     }
 
