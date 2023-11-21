@@ -17,7 +17,7 @@ import { UserService } from './Services/user.service';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'postgres',
+      password: '0205',
       database: 'blog',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,

@@ -13,4 +13,7 @@ export class Text {
 
     @Column()
     content: string;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    createdAt: Date;
 }
